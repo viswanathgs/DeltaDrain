@@ -46,6 +46,7 @@ public class DeltaDrain extends MIDlet implements CommandListener {
     Command addFormAddCommand = new Command("Add this bugger", Command.OK, 1);
     Command addFormBackCommand = new Command("Back to My Buggers", Command.OK, 2);
     Command updateFormUpdateCommand = new Command("Update Delta", Command.OK, 1);
+    Command viewFormAddCommand = new Command("Add Delta", Command.OK, 1);
 
     TextField addFormNameField = null;
     TextField updateFormDeltaField = null;
@@ -138,6 +139,7 @@ public class DeltaDrain extends MIDlet implements CommandListener {
         updateForm.append(updateFormCommentField);
 
         updateForm.addCommand(updateFormUpdateCommand);
+        updateForm.addCommand(machiListViewCommand);
         updateForm.addCommand(addFormBackCommand);
         updateForm.addCommand(machiListExitCommand);
 
@@ -183,6 +185,7 @@ public class DeltaDrain extends MIDlet implements CommandListener {
             }
         }
 
+        viewForm.addCommand(viewFormAddCommand);
         viewForm.addCommand(addFormBackCommand);
         viewForm.addCommand(machiListExitCommand);
 
@@ -276,6 +279,9 @@ public class DeltaDrain extends MIDlet implements CommandListener {
                     machiRecord.updateRecord(currentMachiName, delta, comment);
                 }
                 setAndDisplayMachiList();
+            }
+            else if (c == viewFormAddCommand) {
+                switchToUpdateForm();
             }
 
         } catch (Exception ex) {
