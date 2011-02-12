@@ -4,9 +4,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import javax.microedition.rms.InvalidRecordIDException;
 import javax.microedition.rms.RecordEnumeration;
 import javax.microedition.rms.RecordStore;
 import javax.microedition.rms.RecordStoreException;
+import javax.microedition.rms.RecordStoreNotOpenException;
 
 /*
  * To change this template, choose Tools | Templates
@@ -135,5 +137,23 @@ public class MachiRecord {
         }
 
         return flag;
+    }
+
+    int getCurrentDelta (String mname) throws RecordStoreNotOpenException, InvalidRecordIDException, IOException, RecordStoreException {
+        int currentDelta = 0;
+        RecordEnumeration recordEnum = recordStore.enumerateRecords(null, null, true);
+
+        while (recordEnum.hasNextElement()) {
+            int recordId = recordEnum.nextRecordId();
+            byte[] rec = recordStore.getRecord(recordId);
+
+            Machi machi = BytesToMachi(rec);
+            if (mname.equals(machi.name)) {
+                currentDelta = machi.balance;
+                break;
+            }
+        }
+
+        return currentDelta;
     }
 }
