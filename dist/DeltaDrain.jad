@@ -1,0 +1,8 @@
+MIDlet-1: DeltaMIDlet, , DeltaMIDlet
+MIDlet-Jar-Size: 9538
+MIDlet-Jar-URL: DeltaDrain.jar
+MIDlet-Name: DeltaDrain
+MIDlet-Vendor: Vendor
+MIDlet-Version: 1.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.1
