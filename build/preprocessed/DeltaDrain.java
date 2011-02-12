@@ -131,7 +131,7 @@ public class DeltaDrain extends MIDlet implements CommandListener {
         updateFormDeltaField = new TextField("Delta value: (-ve if you're lending)", "0", 10, TextField.NUMERIC);
         updateFormCommentField = new TextField("Comment:", "", 30, TextField.ANY);
 
-        String outstr = "Current Delta (-ve if you need to get money) = " + machiRecord.getCurrentDelta(currentMachiName) + " bucks\n";
+        String outstr = "Current Delta (-ve if you need to get money) = " + machiRecord.getCurrentDelta(currentMachiName) + " bucks\n\n";
         updateForm.append(outstr);
         updateForm.append(updateFormDeltaField);
         updateForm.append(updateFormCommentField);
@@ -174,7 +174,7 @@ public class DeltaDrain extends MIDlet implements CommandListener {
                     
                     viewForm.append(dateField);
 
-                    outstr = " (" + machi.history.transHistory[i].comment + ")\n";
+                    outstr = " (" + machi.history.transHistory[i].comment + ")\n\n";
                     viewForm.append(outstr);
                 }
                 
