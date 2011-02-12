@@ -17,7 +17,7 @@ public class Transaction {
         comment = cmt;
         timestamp = System.currentTimeMillis();
         // Conversion from UTC to IST. IST is 5 hr 30 mins ahead of UTC.
-        timestamp += (5*60 + 30) * 60 * 1000;
+        // timestamp += (5*60 + 30) * 60 * 1000;
     }
 
     public Transaction () {
