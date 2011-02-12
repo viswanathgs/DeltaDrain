@@ -5,6 +5,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import javax.microedition.rms.InvalidRecordIDException;
+import javax.microedition.rms.RecordComparator;
 import javax.microedition.rms.RecordEnumeration;
 import javax.microedition.rms.RecordStore;
 import javax.microedition.rms.RecordStoreException;
@@ -21,6 +22,7 @@ import javax.microedition.rms.RecordStoreNotOpenException;
  */
 public class MachiRecord {
     RecordStore recordStore = null;
+    RecordComparator comparator = new Comparator();
     String recordName;
 
     public MachiRecord (String tname) {
@@ -156,4 +158,32 @@ public class MachiRecord {
 
         return currentDelta;
     }
+}
+
+class Comparator implements RecordComparator {
+
+    public int compare(byte[] rec1, byte[] rec2) {
+        ByteArrayInputStream bytestream1 = new ByteArrayInputStream(rec1);
+        DataInputStream reader1 = new DataInputStream(bytestream1);
+
+        ByteArrayInputStream bytestream2 = new ByteArrayInputStream(rec2);
+        DataInputStream reader2 = new DataInputStream(bytestream2);
+
+        String name1 = null, name2 = null;
+        try {
+            name1 = reader1.readUTF();
+            name2 = reader2.readUTF();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        int comparison = name1.compareTo(name2);
+        if (comparison == 0)
+            return RecordComparator.EQUIVALENT;
+        else if (comparison < 0)
+            return RecordComparator.PRECEDES;
+        else
+            return RecordComparator.FOLLOWS;
+    }
+
 }

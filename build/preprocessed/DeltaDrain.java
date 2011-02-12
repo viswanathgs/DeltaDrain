@@ -55,7 +55,7 @@ public class DeltaDrain extends MIDlet implements CommandListener {
     void setAndDisplayMachiList() throws RecordStoreNotOpenException, InvalidRecordIDException, IOException, RecordStoreException {
         machiList = new List("My Buggers", Choice.IMPLICIT);
 
-        RecordEnumeration recordEnum = machiRecord.recordStore.enumerateRecords(null, null, true);
+        RecordEnumeration recordEnum = machiRecord.recordStore.enumerateRecords(null, machiRecord.comparator, true);
 
         while (recordEnum.hasNextElement()) {
             Machi machi = machiRecord.BytesToMachi(recordEnum.nextRecord());
