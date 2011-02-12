@@ -1,4 +1,4 @@
-MIDlet-1: DeltaMIDlet, ,DeltaDrain
+MIDlet-1: DeltaDrain,,DeltaDrain
 MIDlet-Vendor: Vendor
 MIDlet-Name: DeltaDrain
 MIDlet-Version: 1.0

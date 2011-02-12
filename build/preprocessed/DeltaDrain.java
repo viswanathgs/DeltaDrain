@@ -12,6 +12,7 @@ import javax.microedition.lcdui.DateField;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Form;
+import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.List;
 import javax.microedition.lcdui.TextField;
 import javax.microedition.midlet.*;
@@ -131,7 +132,7 @@ public class DeltaDrain extends MIDlet implements CommandListener {
         updateFormDeltaField = new TextField("Delta value: (-ve if you're lending)", "0", 10, TextField.NUMERIC);
         updateFormCommentField = new TextField("Comment:", "", 30, TextField.ANY);
 
-        String outstr = "Current Delta (-ve if you need to get money) = " + machiRecord.getCurrentDelta(currentMachiName) + " bucks\n\n";
+        String outstr = "Current Delta (-ve if the bugger owes you) = " + machiRecord.getCurrentDelta(currentMachiName) + " bucks\n\n";
         updateForm.append(outstr);
         updateForm.append(updateFormDeltaField);
         updateForm.append(updateFormCommentField);
@@ -157,7 +158,7 @@ public class DeltaDrain extends MIDlet implements CommandListener {
                 machi.calculateType();
 
                 String outstr = "";
-                outstr = "Current Delta (-ve if you need to get money) = " + machi.balance + " bucks\n\n";
+                outstr = "Current Delta (-ve if the bugger owes you) = " + machi.balance + " bucks\n\n";
                 viewForm.append(outstr);
                 outstr = "Category: " + machi.type + "\n\n";
                 viewForm.append(outstr);
