@@ -46,7 +46,9 @@ public class DeltaDrain extends MIDlet implements CommandListener {
     Command addFormAddCommand = new Command("Add this bugger", Command.OK, 1);
     Command addFormBackCommand = new Command("Back to My Buggers", Command.OK, 2);
     Command updateFormUpdateCommand = new Command("Update Delta", Command.OK, 1);
+    Command updateFormResetCommand = new Command("Reset Delta", Command.OK, 1);
     Command viewFormAddCommand = new Command("Add Delta", Command.OK, 1);
+    Command viewFormResetCommand = new Command("Reset Delta", Command.OK, 1);
 
     TextField addFormNameField = null;
     TextField updateFormDeltaField = null;
@@ -139,6 +141,7 @@ public class DeltaDrain extends MIDlet implements CommandListener {
         updateForm.append(updateFormCommentField);
 
         updateForm.addCommand(updateFormUpdateCommand);
+        updateForm.addCommand(updateFormResetCommand);
         updateForm.addCommand(machiListViewCommand);
         updateForm.addCommand(addFormBackCommand);
         updateForm.addCommand(machiListExitCommand);
@@ -186,6 +189,7 @@ public class DeltaDrain extends MIDlet implements CommandListener {
         }
 
         viewForm.addCommand(viewFormAddCommand);
+        viewForm.addCommand(viewFormResetCommand);
         viewForm.addCommand(addFormBackCommand);
         viewForm.addCommand(machiListExitCommand);
 
@@ -280,8 +284,26 @@ public class DeltaDrain extends MIDlet implements CommandListener {
                 }
                 setAndDisplayMachiList();
             }
+            else if (c == updateFormResetCommand) {
+                int delta = machiRecord.getCurrentDelta(currentMachiName);
+                String comment = "Reset delta";
+
+                if (delta != 0) {
+                    machiRecord.updateRecord(currentMachiName, -delta, comment);
+                }
+                switchToUpdateForm();
+            }
             else if (c == viewFormAddCommand) {
                 switchToUpdateForm();
+            }
+            else if (c == viewFormResetCommand) {
+                int delta = machiRecord.getCurrentDelta(currentMachiName);
+                String comment = "Reset delta";
+
+                if (delta != 0) {
+                    machiRecord.updateRecord(currentMachiName, -delta, comment);
+                }
+                switchToViewForm();
             }
 
         } catch (Exception ex) {
